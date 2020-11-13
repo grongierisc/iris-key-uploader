@@ -2,36 +2,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
+import { KeyComponent } from './key/key.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { NgxSpinnerModule } from "ngx-spinner";
-import { DndDirective } from './file-upload/direcitves/dnd.directive'; 
-
-import { UiSwitchModule } from 'ngx-toggle-switch';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileUploadComponent,
-    DndDirective
+    KeyComponent,
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    ToastrModule.forRoot(),
-    BrowserAnimationsModule,
-    NgxSpinnerModule,
-    UiSwitchModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-
 export class AppModule { }

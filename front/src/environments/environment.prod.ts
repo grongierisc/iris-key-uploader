@@ -1,4 +1,3 @@
 export const environment = {
-  production: true,
-  base_url : location.protocol
+  production: true
 };
