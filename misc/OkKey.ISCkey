@@ -1,0 +1,25 @@
+[ConfigFile]
+FileType=InterSystems License Rev-A.1
+LicenseID=654321
+
+[License]
+LicenseCapacity=InterSystems IRIS 2020.2, Enterprise:128, Concurrent User, Container(Ubuntu x64)
+CustomerName=IAM for InterSystems internal_IAM
+OrderNumber=54321
+ExpirationDate=11/30/2021
+AuthorizationKey=41265000128000128000000000023AEB9D6094020F38003
+MachineID=
+
+
+[ISC.IAM]
+Key={"license":{"version":1,"signature":"b1ee446c0141e3a4547c1f3e4654890dc4da475f7a42b7cf996ae8fbf7f618fef8d42b3db2988aff519075dd3e8ab7be59822afedb69d99aa749a2c015a1e610","payload":{"customer":"InterSystems","license_creation_date":"2020-9-3","product_subscription":"Kong Enterprise Edition","support_plan":"None","admin_seats":"5","dataplanes":"","license_expiration_date":"2021-09-03","license_key":"0014100001w24ExAAI_a1V1K000007PyK4UAK"}}}
+
+[License Characteristics]
+Licensed Product: Enterprise
+Licensed Type: Concurrent User
+Licensed Platform: Container(Ubuntu x64)
+Users licensed: 128
+Designation: ISC Internal
+Multi-Server license
+IntegratedML enabled
+API Management enabled

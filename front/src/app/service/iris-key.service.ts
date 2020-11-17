@@ -21,9 +21,16 @@ export class IrisKeyService {
 
     const headers = new HttpHeaders()
 
-    let base = environment.BASE_PATH
+    let url = ''
 
-    let path = ''
+    let base = environment.BASE_PATH
+    let path = '/api/irisapp/keyuploader/key'
+
+    url = base + path
+
+    if (!environment.production) {
+      url = 'http://localhost:52773/api/irisapp/keyuploader/key'
+    }
   
     var result = this.http.post(base+path, file)
     return result

@@ -1,3 +1,7 @@
 <h2>Details</h2>
-<div><span>customer: </span>{{key.customer}}</div>
-<div><span>decode: </span>{{key.decode}}</div>
+<div class="angular-with-newlines">{{key.infoKey}}</div>
+<div class="angular-with-newlines">{{key.summary}}</div>
+<button mat-button aria-label="Upload Key" class="test"
+(click)="openUploadKey()">
+    Upload Key
+</button>

@@ -28,6 +28,9 @@ ClassMethod import() As %Status
   #dim %request As %CSP.Response
   #dim stream As %CSP.BinaryStream
 
+  set tSC = $$$OK
+  set dyna = {}
+
   Try {
 
     // Get stream
@@ -35,12 +38,36 @@ ClassMethod import() As %Status
     if '$IsObject(stream) {
       $$$ThrowOnError($$$ERROR(9200,"no file"))
     }
+    
+    //Test new key
+    set tFile = ##class(%FileCharacterStream).%New()
+    $$$ThrowOnError(tFile.CopyFrom(stream))
+    $$$ThrowOnError(tFile.LinkToFile("/tmp/iris.key"))
+    $$$ThrowOnError(tFile.%Save())
+    $$$ThrowOnError($SYSTEM.License.IsValidKey("/tmp/iris.key"))
+    
+    //Save new key
+    set tFile = ##class(%FileCharacterStream).%New()
+    $$$ThrowOnError(tFile.LinkToFile($SYSTEM.Util.ManagerDirectory()_"iris.key"))
+    $$$ThrowOnError(tFile.CopyFrom(stream))
+    $$$ThrowOnError(tFile.%Save())
+    $$$ThrowOnError($SYSTEM.License.Upgrade())
 
+    //Set response 
+    set dyna.message = "Key Updated"
+    w dyna.%ToJSON()
+  
   } Catch ex {
-      Return ex.AsStatus()
+      #dim tSC as %Status
+      set tSC =  ex.AsStatus()
+      if $system.Status.GetErrorCodes(tSC) = 6082 {
+        set dyna.message = "Restart needed !!!"
+        set tSC = $$$OK
+      }
+      w dyna.%ToJSON()
   }
 
-  Quit $$$OK
+  Quit tSC
 }
 
 ClassMethod info() As %Status
@@ -48,12 +75,12 @@ ClassMethod info() As %Status
 
     k ^SPOOL
 
-    set tDecode = ..GetDecode()
-    set tCustomer = ..CustomerName()
+    set tSummary = ..GetShowSummary()
+    set tInfoKey = ..InfoKey()
     
     set dyna = {}
-    set dyna.decode = tDecode
-    set dyna.customer = tCustomer
+    set dyna.summary = tSummary
+    set dyna.infoKey = tInfoKey
 
     set %response.ContentType = "application/json"
 
@@ -62,12 +89,12 @@ ClassMethod info() As %Status
     Quit $$$OK
 }
 
-ClassMethod GetDecode() As %String
+ClassMethod GetShowSummary() As %String
 {
 
     /// https://community.intersystems.com/post/spool-forgotten-device
     OPEN 2:1 USE 2
-    d $SYSTEM.License.Decode()
+    d $SYSTEM.License.ShowSummary()
     CLOSE 2
 
     set val = ""
@@ -82,12 +109,12 @@ ClassMethod GetDecode() As %String
     Return val
 }
 
-ClassMethod CustomerName() As %String
+ClassMethod InfoKey() As %String
 {
 
     /// https://community.intersystems.com/post/spool-forgotten-device
     OPEN 2:2 USE 2
-    d $SYSTEM.License.KeyCustomerName()
+    d $SYSTEM.License.CKEY()
     CLOSE 2
 
     set val = ""
