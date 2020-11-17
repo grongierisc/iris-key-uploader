@@ -105,7 +105,7 @@ export class UploaderComponent implements OnInit {
 
     this.file = this.form.get('file').value
     this.keyService.import(formData).subscribe((data: any) => {
-      this._snackBar.open('File sent!', 'View Trace', { duration: 5000})
+      this._snackBar.open(data.message, 'Done')
       .onAction()
 
 

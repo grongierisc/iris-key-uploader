@@ -32,8 +32,7 @@ export class IrisKeyService {
       url = 'http://localhost:52773/api/irisapp/keyuploader/key'
     }
   
-    var result = this.http.post(base+path, file)
-    return result
+    return this.http.post(base+path, file)
   }
 
   info(): Observable<Key> {
