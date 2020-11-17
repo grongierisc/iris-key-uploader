@@ -38,20 +38,22 @@ ClassMethod import() As %Status
     if '$IsObject(stream) {
       $$$ThrowOnError($$$ERROR(9200,"no file"))
     }
+
+    do ##class(%File).Delete("/tmp/iris.key")
     
     //Test new key
-    set tFile = ##class(%FileCharacterStream).%New()
-    $$$ThrowOnError(tFile.CopyFrom(stream))
-    $$$ThrowOnError(tFile.LinkToFile("/tmp/iris.key"))
-    $$$ThrowOnError(tFile.%Save())
+    set tFile = ##class(%File).%New("/tmp/iris.key")
+    $$$ThrowOnError(tFile.Open("WSN"))
+    $$$ThrowOnError(tFile.Write(stream.Read()))
+    do tFile.Close()
     $$$ThrowOnError($SYSTEM.License.IsValidKey("/tmp/iris.key"))
     
     //Save new key
-    set tFile = ##class(%FileCharacterStream).%New()
-    $$$ThrowOnError(tFile.LinkToFile($SYSTEM.Util.ManagerDirectory()_"iris.key"))
-    $$$ThrowOnError(tFile.CopyFrom(stream))
-    $$$ThrowOnError(tFile.%Save())
-    $$$ThrowOnError($SYSTEM.License.Upgrade())
+    if ##class(%File).CopyFile("/tmp/iris.key",$SYSTEM.Util.ManagerDirectory()_"iris.key",1) {
+      $$$ThrowOnError($SYSTEM.License.Upgrade())
+    } else {
+      $$$ThrowOnError($$$ERROR(9200,"Can't copy file to MGR"))
+    }
 
     //Set response 
     set dyna.message = "Key Updated"
@@ -62,9 +64,10 @@ ClassMethod import() As %Status
       set tSC =  ex.AsStatus()
       if $system.Status.GetErrorCodes(tSC) = 6082 {
         set dyna.message = "Restart needed !!!"
+        w dyna.%ToJSON()
         set tSC = $$$OK
       }
-      w dyna.%ToJSON()
+      
   }
 
   Quit tSC
@@ -77,10 +80,12 @@ ClassMethod info() As %Status
 
     set tSummary = ..GetShowSummary()
     set tInfoKey = ..InfoKey()
+    set tDump = ..GetDumpKey()
     
     set dyna = {}
     set dyna.summary = tSummary
     set dyna.infoKey = tInfoKey
+    set dyna.dump = tDump
 
     set %response.ContentType = "application/json"
 
@@ -107,6 +112,15 @@ ClassMethod GetShowSummary() As %String
     }
 
     Return val
+}
+
+ClassMethod GetDumpKey() As %String
+{
+
+    set tStream = ##class(%FileCharacterStream).%New()
+    $$$ThrowOnError(tStream.LinkToFile($SYSTEM.Util.ManagerDirectory()_"iris.key"))
+
+    Return tStream.Read()
 }
 
 ClassMethod InfoKey() As %String

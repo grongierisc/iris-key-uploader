@@ -24,12 +24,12 @@ export class IrisKeyService {
     let url = ''
 
     let base = environment.BASE_PATH
-    let path = '/api/irisapp/keyuploader/key'
+    let path = '/api/keyuploader/key'
 
     url = base + path
 
     if (!environment.production) {
-      url = 'http://localhost:52773/api/irisapp/keyuploader/key'
+      url = 'http://localhost:52773/api/keyuploader/key'
     }
   
     return this.http.post(base+path, file)
@@ -42,13 +42,13 @@ export class IrisKeyService {
     let url = ''
 
     let base = environment.BASE_PATH
-    let path = '/api/irisapp/keyuploader/key'
+    let path = '/api/keyuploader/key'
 
     url = base + path
 
     if (!environment.production) {
-      url = 'http://localhost:52773/api/irisapp/keyuploader/key'
-    }
+      url = 'http://localhost:52773/api/keyuploader/key'
+    }  
 
     return this.http.get<Key>(url)
 

@@ -1,7 +1,31 @@
-<h2>Details</h2>
-<div class="angular-with-newlines">{{key.infoKey}}</div>
-<div class="angular-with-newlines">{{key.summary}}</div>
-<button mat-button aria-label="Upload Key" class="test"
+<mat-accordion>
+    <mat-expansion-panel fxLayout="column" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Key Info
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="angular-with-newlines">{{key.infoKey}}</div>
+    </mat-expansion-panel>
+    <mat-expansion-panel fxLayout="column" [expanded]="false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Key Detail
+              </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="angular-with-newlines">{{key.summary}}</div>
+    </mat-expansion-panel>
+    <mat-expansion-panel fxLayout="column" [expanded]="false">
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+              Key Dump
+            </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="angular-with-newlines">{{key.dump}}</div>
+  </mat-expansion-panel>
+</mat-accordion>
+<br/>
+<button mat-raised-button color="primary" aria-label="Upload Key"
 (click)="openUploadKey()">
     Upload Key
 </button>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { IrisKeyService } from '../service/iris-key.service'
 import { Key } from './key';
 
@@ -6,6 +6,7 @@ import { MatDialog} from '@angular/material/dialog';
 import { UploaderComponent } from '../uploader/uploader.component';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-key',
@@ -13,9 +14,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./key.component.scss']
 })
 export class KeyComponent implements OnInit {
+
+  @ViewChild(MatAccordion) accordion: MatAccordion;
+
   key: Key = {
     infoKey: '',
-    summary: ''
+    summary: '',
+    dump: ''
   };
   constructor(
     private _dialog: MatDialog, 
@@ -28,7 +33,7 @@ export class KeyComponent implements OnInit {
       
       console.log("There was an error importing file", error);
 
-      this._snackBar.open("Failed : "+error.message,'Close');
+      this._snackBar.open("Failed : "+error,'Close');
 
   })
   }

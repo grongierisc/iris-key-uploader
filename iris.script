@@ -5,7 +5,7 @@ set sc = ##class(App.Installer).setup()
 zn "IRISAPP"
 
 zpm
-install "csvgen-ui"
+load "/opt/irisapp"
 q
 
 zn "%SYS"

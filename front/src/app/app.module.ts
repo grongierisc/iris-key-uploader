@@ -11,7 +11,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {MatDialogModule} from '@angular/material/dialog';
-import {MatSnackBarModule} from '@angular/material/snack-bar'
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatExpansionModule,
     MatDialogModule,
+    MatButtonModule,
     MatSnackBarModule
   ],
   providers: [],

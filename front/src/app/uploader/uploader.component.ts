@@ -110,12 +110,13 @@ export class UploaderComponent implements OnInit {
 
 
       this.reset()
+      
 
   }, error => {
       
       console.log("There was an error importing file", error);
 
-      this._snackBar.open("Failed : "+error.message,'Close');
+      this._snackBar.open("Failed : "+error.error.summary,'Close');
 
   })
   }
