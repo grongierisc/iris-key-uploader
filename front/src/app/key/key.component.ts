@@ -29,6 +29,10 @@ export class KeyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.refresh()
+  }
+
+  refresh():void {
     this.keyService.info().subscribe( key => {this.key = key},error => {
       
       console.log("There was an error importing file", error);
@@ -45,12 +49,13 @@ export class KeyComponent implements OnInit {
       data: {
         
       }
+      
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+      
         this.keyService.info().subscribe( key => {this.key = key})
-      }
+      
     });
   }
 }

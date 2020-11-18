@@ -2,7 +2,7 @@ import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IrisKeyService } from '../service/iris-key.service'
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA,MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -18,6 +18,7 @@ export class UploaderComponent implements OnInit {
   file: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<UploaderComponent>,
     public fb: FormBuilder,
     private _snackBar: MatSnackBar,
     private keyService: IrisKeyService,
@@ -110,7 +111,7 @@ export class UploaderComponent implements OnInit {
 
 
       this.reset()
-      
+      this.dialogRef.close()
 
   }, error => {
       
