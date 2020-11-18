@@ -7,9 +7,9 @@ The aim of this project is to easily import key file to Iris from a web ui.
 
 Unfortunatly the IRIS panel to change key doesn't give the opportunity to upload the license.
 
-![Panel](https://raw.githubusercontent.com/grongierisc/iris-key-uploader/master/misc/iris_panel.png)
+![Panel](https://raw.githubusercontent.com/grongierisc/iris-key-uploader/master/misc/panel.gif)
 
-As you can see, you can only browse from the server side.
+As you can see, you can only browse from the **server side**.
 
 What if, you don't have a direct access to it ?
 
