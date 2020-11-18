@@ -37,7 +37,7 @@ export class KeyComponent implements OnInit {
       
       console.log("There was an error importing file", error);
 
-      this._snackBar.open("Failed : "+error,'Close');
+      this._snackBar.open("Failed : "+error.message,'Close');
 
   })
   }
