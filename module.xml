@@ -7,7 +7,7 @@
       <Description>An angular frontend to upload iris keys.</Description>
       <Keywords>REST,Full-stack,angular</Keywords>
       <Packaging>module</Packaging>
-      <CSPApplication CookiePath="/keyuploader" DefaultTimeout="900" DeployPath="${cspdir}/keyuploader" MatchRoles=":${dbrole}" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" SourcePath="/front/dist/keyuploader-ui" UnauthenticatedEnabled="1" Url="/keyuploader" UseSessionCookie="2"/>
+      <CSPApplication CookiePath="/keyuploader" DefaultTimeout="900" DeployPath="${cspdir}/keyuploader" MatchRoles=":${dbrole}" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" SourcePath="/front/dist/iris-key-uploader" UnauthenticatedEnabled="1" Url="/keyuploader" UseSessionCookie="2"/>
       <SourcesRoot>src</SourcesRoot>
       <Resource Directory="cls" Name="Grongier.PKG"/>
       <CSPApplication CookiePath="/keyuploader" DefaultTimeout="900" DispatchClass="Grongier.API.KEY.Dispatch" MatchRoles=":%All" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="1" Url="/api/keyuploader" UseSessionCookie="2"/>
